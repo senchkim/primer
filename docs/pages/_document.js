@@ -2,7 +2,17 @@ import React from 'react'
 import Document, {Main, NextScript} from 'next/document'
 import {ServerStyleSheet} from 'styled-components'
 import {extractCritical} from 'emotion-server'
-import {config, rootPage, getAssetPath} from '../src/utils'
+import {getAssetPath} from '../src/utils'
+import sass from '../lib/sass.macro'
+
+const GlobalCSS = ({id}) => (
+  <style id={id} dangerouslySetInnerHTML={{__html: sass`
+    @import "primer/index.scss";
+    @import "prism-github/prism-github.scss";
+    // this is a hack for busted HTML syntax highlighting (in Prism???)
+    .language-html .token { color: $gray-800 !important; }
+  `}} />
+)
 
 export default class MyDocument extends Document {
   static getInitialProps({renderPage}) {
@@ -47,16 +57,13 @@ export default class MyDocument extends Document {
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:site" content="@githubprimer" />
           <link rel="stylesheet" href={getAssetPath('github/styleguide.css')} />
-          <link
-            rel="stylesheet"
-            href={config.production ? getAssetPath('primer.css') : '/_next/static/css/styles.chunk.css'}
-          />
+          <GlobalCSS id="global-css" />
           {styleTags}
         </head>
         <body>
           <Main />
           <NextScript />
-          <script src={getAssetPath('github/styleguide.js')} />
+          {<script src={getAssetPath('github/styleguide.js')} />}
         </body>
       </html>
     )
