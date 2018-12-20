@@ -21,14 +21,14 @@ const languageTransforms = {
 }
 
 export default function CodeExample(props) {
-  const {children, dangerouslySetInnerHTML, dead, source, ...rest} = props
-  const lang = getLanguage(props.className)
+  const {children, className, dangerouslySetInnerHTML, dead, source, ...rest} = props
+  const lang = getLanguage(className)
   if (lang && !dead) {
     rest.code = source
     rest.scope = {Octicon, getIconByName}
     rest.transformCode = getTransformForLanguage(lang)
     return (
-      <LiveProvider {...rest}>
+      <LiveProvider mountStylesheet={false} {...rest}>
         <BorderBox bg="gray.1" my={4}>
           <Box bg="white" p={3} className="clearfix">
             <LivePreview />
@@ -36,6 +36,7 @@ export default function CodeExample(props) {
           <Relative p={3}>
             <Text
               is={LiveEditor}
+              className={className}
               fontFamily="mono"
               lineHeight="normal"
               bg="transparent"
