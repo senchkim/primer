@@ -39,7 +39,7 @@ export default function PackageHeader(props) {
     <Flex justifyContent="space-between" mb={4} {...rest}>
       <Text is="div" fontSize={1}>
         {status ? (
-          <BorderBox is="a" href="/css/whats-new/status-key" display="inline-block" px={2} py={1} mr={2}>
+          <BorderBox is={Link} href="/css/whats-new/status-key" display="inline-block" px={2} py={1} mr={2}>
             <Octicon icon={PrimitiveDot} color={getStatusColor(status)} mr={2} />
             {status}
           </BorderBox>
