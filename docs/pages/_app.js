@@ -3,30 +3,10 @@ import App, {Container} from 'next/app'
 import {MDXProvider} from '@mdx-js/tag'
 import Head from 'next/head'
 import {BaseStyles, Box, Flex, theme} from '@primer/components'
-import {injectGlobal} from 'emotion'
 import {Header, PackageHeader, SideNav, IndexHero} from '../src/components'
-import getComponents from '../src/markdown'
+import getComponents, {H1, MarkdownBody} from '../src/markdown'
 import {rootPage} from '../src/utils'
 import {CONTENT_MAX_WIDTH} from '../src/constants'
-
-import 'primer/index.scss'
-import 'prism-github'
-
-// XXX undo .markdown-body .rule (:facepalm:)
-injectGlobal`
-  .markdown-body .rule.token {
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    border-bottom: none;
-  }
-
-  .markdown-body .rule.token::before,
-  .markdown-body .rule.token::after {
-    display: none;
-  }
-}
-`
 
 export default class MyApp extends App {
   static async getInitialProps({Component, ctx}) {
@@ -59,17 +39,17 @@ export default class MyApp extends App {
             <Box width={['auto', 'auto', 'auto', '80%']}>
               {meta.hero ? <IndexHero /> : null}
               <Box color="gray.9" maxWidth={['auto', 'auto', 'auto', CONTENT_MAX_WIDTH]} px={6} mx="auto" my={6}>
-                <div className="markdown-body">
-                  {!meta.hero && meta.title ? <h1>{meta.title}</h1> : null}
-                  <PackageHeader {...meta} />
+                {!meta.hero && meta.title ? <H1>{meta.title}</H1> : null}
+                <PackageHeader {...meta} />
+                <MarkdownBody mb={4}>
                   <MDXProvider components={components}>
                     <Component {...page} />
                   </MDXProvider>
-                  <details>
-                    <summary>Metadata</summary>
-                    <pre>meta: {JSON.stringify(meta, null, 2)}</pre>
-                  </details>
-                </div>
+                </MarkdownBody>
+                <details>
+                  <summary>Metadata</summary>
+                  <pre>{JSON.stringify(meta, null, 2)}</pre>
+                </details>
                 {/* TODO: bring back edit link! */}
               </Box>
             </Box>
