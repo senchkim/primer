@@ -3,11 +3,9 @@ title: Docs
 hero: true
 ---
 
-import {Box, Flex, Heading, Text} from '@primer/components'
+import {Box, ButtonOutline, Flex, Heading, Link, Text} from '@primer/components'
 import {
   MetaPackageBox,
-  OverviewTitle,
-  OverviewText,
   PrimerPackageBox,
   PrimitivesOverview,
   StylesOverview
@@ -18,17 +16,15 @@ import packages from './packages.json'
 
 Our goal is to create a system that enables us to build consistent user experiences with ease, yet with enough flexibility to support the broad spectrum of GitHub websites. This goal is embedded in our design and code decisions. Our approach to CSS is influenced by Object Oriented CSS principles, functional CSS, and BEM architecture.
 
-<Box my={6}>
-  <Heading fontSize={5} fontWeight="normal" textAlign="center">Highly reusable, flexible styles</Heading>
-  <Text is="p" fontSize={3}>Styles can be mixed and matched to achieve many different layouts, independent of their location. These styles fall into three categories:</Text>
-</Box>
+## Highly reusable, flexible styles
+
+Styles can be mixed and matched to achieve many different layouts, independent of their location. These styles fall into three categories:
 
 <StylesOverview m={6} />
 
-<Box my={6}>
-  <Heading fontSize={5} fontWeight="normal" textAlign="center">Systematically designed for GitHub</Heading>
-  <Text is="p" fontSize={3}>Primer is built upon systems that form the foundation of our styles such as spacing, typography, and color. This systematic approach helps ensure our styles are consistent and interoperable with each other.</Text>
-</Box>
+## Systematically designed for GitHub
+
+Primer is built upon systems that form the foundation of our styles such as spacing, typography, and color. This systematic approach helps ensure our styles are consistent and interoperable with each other.
 
 <PrimitivesOverview />
 
@@ -50,13 +46,12 @@ Each component or group of styles is packaged up and distributed via npm. Primer
   </MetaPackageBox>
 </Flex>
 
-
-<div class="bg-gray py-6">
-  <div class="d-flex flex-wrap flex-md-nowrap px-6 gutter-lg">
-    <div class="col-12 col-md-9 pr-0 pr-lg-2">
-      <h3 class="f3 text-normal m-0">Use Primer in your project</h3>
-      <p class="my-3">Pick and choose what you need. Install the entire Primer bundle or individual packages via npm.</p>
-      <a href="/css/getting-started/" class="btn btn-outline">Installation instructions</a>
-    </div>
-  </div>
-</div>
+<Box bg="gray.1" py={6}>
+  <Flex flexWrap={['wrap', 'wrap', 'nowrap']} px={6} className="gutter-lg">
+    <Flex.Item width={[1, 1, 9/12]} pr={[0, 0, 0, 2]}>
+      <Heading fontSize={3} fontWeight="normal" m={0}>Use Primer in your project</Heading>
+      <Box my={3}>Pick and choose what you need. Install the entire Primer bundle or individual packages via npm.</Box>
+      <ButtonOutline is={Link} href="/css/getting-started/">Installation instructions</ButtonOutline>
+    </Flex.Item>
+  </Flex>
+</Box>
